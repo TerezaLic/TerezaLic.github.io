@@ -18,7 +18,7 @@ function startOrch() {
 
     $("a#start").html("waiting").addClass("info waiting").removeClass("button").attr("title", "");
     $.ajax({
-        url: "https://syrup.keboola.com/orchestrator/orchestrations/" + orchestrationId + "/jobs",
+        url: "https://syrup.eu-central-1.keboola.com/orchestrator/orchestrations/" + orchestrationId + "/jobs",
         type: "post",
         headers: { "x-storageapi-token": token },
         dataType: "json"
@@ -37,7 +37,7 @@ function startOrch() {
 
 function checkStatus(jobId) {
     $.ajax({
-        url: "https://syrup.keboola.com/orchestrator/jobs/" + jobId,
+        url: "https://syrup.eu-central-1.keboola.com/orchestrator/jobs/" + jobId,
         type: "get",
         headers: { "x-storageapi-token": token },
         dataType: "json"

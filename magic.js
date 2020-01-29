@@ -5,7 +5,8 @@
 
 /*var orchestrationId = urlParam("id");*/
 var orchestrationId ="59937776"
-var token = urlParam("token");
+/*var token = urlParam("token"); */
+var token = 
 var waiting = 0;
 var loop;
 

@@ -6,14 +6,17 @@
 
 var orchestrationId = urlParam("id");
 var token = urlParam("token");
+
 var waiting = 0;
 var loop;
+
 
 function urlParam (name) {
     return unescape(window.location.search
                     .replace(new RegExp("^(?:.*[&\\?]" + escape(name)
                     .replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
 }
+
 
 function startOrch() {
 

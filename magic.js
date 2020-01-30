@@ -3,24 +3,39 @@
  * status: https://syrup.keboola.com/orchestrator/jobs/$jobId GET
  */
 
-
+/*
 var orchestrationId = urlParam("id");
 var token = urlParam("token");
+*/
 
 var waiting = 0;
 var loop;
 
 
+/*
 function urlParam (name) {
     return unescape(window.location.search
                     .replace(new RegExp("^(?:.*[&\\?]" + escape(name)
                     .replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
 }
+*/
 
+/*----------------TEST----------------*/
+var orchestrationId = extractUrlValue("id");
+var token = extractUrlValue("token");
 
+function extractUrlValue(key, url)
+{
+    if (typeof(url) === 'undefined')
+        url = window.location.href;
+    var match = url.match('[?&]' + key + '=([^&]+)');
+    return match ? match[1] : null;
+}
+
+/*------------------------------------------*/
 function startOrch() {
 
-    $("a#start").html("waiting").addClass("info waiting").removeClass("button").attr("title", "");
+    $("a#start").html("waiting").addClass("info waiting").removeClass("button").attr("title"", "");
     $.ajax({
         url: "https://syrup.eu-central-1.keboola.com/orchestrator/orchestrations/" + orchestrationId + "/jobs",
         type: "post",

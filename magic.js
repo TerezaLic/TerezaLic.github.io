@@ -35,7 +35,7 @@ function extractUrlValue(key, url)
 /*------------------------------------------*/
 function startOrch() {
 
-    $("a#start").html("waiting").addClass("info waiting").removeClass("button").attr("title"", "");
+    $("a#start").html("waiting").addClass("info waiting").removeClass("button").attr("title", "");
     $.ajax({
         url: "https://syrup.eu-central-1.keboola.com/orchestrator/orchestrations/" + orchestrationId + "/jobs",
         type: "post",

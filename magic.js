@@ -93,7 +93,7 @@ function checkStatus(jobId) {
 }
 
 $(document).ready(function() {
-    $("a#start.button").load( function() {
+    $("a#start.button").click( function() {
         if($(this).hasClass("button")) startOrch();
         return false;
     });

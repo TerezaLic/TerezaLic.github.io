@@ -17,7 +17,7 @@ function urlParam (name) {
 
 function startOrch() {
 
-    $("a#start").html("waiting").addClass("info waiting").removeClass("button").attr("title", "");
+    $("a#start").html("loading").addClass("info waiting").removeClass("button").attr("title", "");
     $.ajax({
         url: "https://syrup.eu-central-1.keboola.com/orchestrator/orchestrations/" + orchestrationId + "/jobs?limit=1",
         type: "get",
@@ -93,9 +93,7 @@ function checkStatus(jobId) {
 }
 
 $(document).ready(function() {
-    $("a#start.button").click( function() {
-        if($(this).hasClass("button")) startOrch();
-        return false;
-    });
+     startOrch();
 });
+
 

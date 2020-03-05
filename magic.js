@@ -7,7 +7,6 @@ var orchestrationId = urlParam("id");
 var token = urlParam("token");
 var waiting = 0;
 var loop;
-var jobId = "115172724";
 
 function urlParam (name) {
     return unescape(window.location.search
@@ -16,8 +15,37 @@ function urlParam (name) {
 }
 
 
-function checkStatus(jobId) {
+function startOrch() {
+
     $("a#start").html("waiting").addClass("info waiting").removeClass("button").attr("title", "");
+    $.ajax({
+        url: "https://syrup.eu-central-1.keboola.com/orchestrator/orchestrations/" + orchestrationId + "/jobs?limit=1",
+        type: "get",
+        headers: { "x-storageapi-token": token },
+        dataType: "json"
+        
+    })
+    .done(function(data) {
+        var jobId = data[0]['id'];
+        /*
+        $("a#start").html(jobId)
+            .removeClass("waiting processing")
+            .addClass("cancelled");
+            waiting = 0;
+            */
+        waiting = 1;
+        loop = setInterval(function(){checkStatus(jobId)}, 5000);
+    })
+    .fail(function(data) {
+        $("a#start").html("failed")
+            .removeClass("waiting processing")
+            .addClass("cancelled");
+        waiting = 0;
+    });
+
+}
+
+function checkStatus(jobId) {
     $.ajax({
         url: "https://syrup.eu-central-1.keboola.com/orchestrator/jobs/" + jobId,
         type: "get",
@@ -58,15 +86,16 @@ function checkStatus(jobId) {
         if(!waiting) clearInterval(loop);
     })
     .fail(function(data) {
-        $("a#start").html("failed")
+        $("a#start").html("nefunguje")
             .removeClass("waiting processing")
             .addClass("cancelled");
     });
 }
 
 $(document).ready(function() {
-    $("a#start.button").click( function() {
-        if($(this).hasClass("button")) checkStatus();
+    $("a#start.button").load( function() {
+        if($(this).hasClass("button")) startOrch();
         return false;
     });
 });
+

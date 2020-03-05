@@ -17,7 +17,7 @@ function urlParam (name) {
 
 function startOrch() {
 
-    $("a#start").html("loading").addClass("info waiting").removeClass("button").attr("title", "");
+    $("a#start").html("checking status").addClass("info waiting").removeClass("button").attr("title", "");
     $.ajax({
         url: "https://syrup.eu-central-1.keboola.com/orchestrator/orchestrations/" + orchestrationId + "/jobs?limit=1",
         type: "get",

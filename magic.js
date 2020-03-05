@@ -14,26 +14,6 @@ function urlParam (name) {
                     .replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
 }
 
-function startOrch() {
-
-    $("a#start").html("waiting").addClass("info waiting").removeClass("button").attr("title", "");
-    $.ajax({
-        url: "https://syrup.eu-central-1.keboola.com/orchestrator/orchestrations/" + orchestrationId + "/jobs",
-        type: "post",
-        headers: { "x-storageapi-token": token },
-        dataType: "json"
-    })
-    .done(function(data) {
-        waiting = 1;
-        loop = setInterval(function(){checkStatus(data.id)}, 5000);
-    })
-    .fail(function(data) {
-        $("a#start").html("failed")
-            .removeClass("waiting processing")
-            .addClass("cancelled");
-        waiting = 0;
-    });
-}
 
 function checkStatus(jobId) {
     $.ajax({
@@ -83,8 +63,8 @@ function checkStatus(jobId) {
 }
 
 $(document).ready(function() {
-    $("a#start.button").click( function() {
-        if($(this).hasClass("button")) startOrch();
+    $("a#start.button").load( function() {
+        if($(this).hasClass("button")) checkStatus();
         return false;
     });
 });

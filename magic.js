@@ -63,7 +63,7 @@ function checkStatus(jobId) {
 }
 
 $(document).ready(function() {
-    $("a#start.info").load( function() {
+    $("a#start.info").click( function() {
         if($(this).hasClass("info")) checkStatus();
         return false;
     });

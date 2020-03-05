@@ -17,6 +17,7 @@ function urlParam (name) {
 
 
 function checkStatus(jobId) {
+    $("a#start").html("waiting").addClass("info waiting").removeClass("button").attr("title", "");
     $.ajax({
         url: "https://syrup.eu-central-1.keboola.com/orchestrator/jobs/" + jobId,
         type: "get",
@@ -64,8 +65,8 @@ function checkStatus(jobId) {
 }
 
 $(document).ready(function() {
-    $("a#start.info").click( function() {
-        if($(this).hasClass("info")) checkStatus();
+    $("a#start.button").click( function() {
+        if($(this).hasClass("button")) checkStatus();
         return false;
     });
 });

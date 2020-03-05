@@ -7,6 +7,7 @@ var orchestrationId = urlParam("id");
 var token = urlParam("token");
 var waiting = 0;
 var loop;
+jobId = "115172724";
 
 function urlParam (name) {
     return unescape(window.location.search
